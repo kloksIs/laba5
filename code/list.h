@@ -13,7 +13,9 @@ typedef struct {
     Node *tail; //указатель на конец
 } list_type;
 
-list_type *initialization_list(int *array, int size);
+list_type *initialization_void_list();
+
+list_type *initialization_ready_list(int *array, int size);
 
 void append(list_type *list, int a);
 

@@ -2,8 +2,25 @@
 #include <stdlib.h>
 #include "list.h"
 
+list_type *initialization_void_list(){
+    list_type *list = (list_type *) malloc(sizeof(list_type));
+    if (!list) {
+        printf("Ошибка выделения памяти\n");
+        return NULL;
+    }
+    Node *head = (Node*) malloc(sizeof(Node));
+        if (!head) {
+            printf("Ошибка выделения памяти для узла\n");
+            return NULL;
+        }
+    list->size = 1;
+    list->head = head;
+    list->tail = head;
+    del_last_el(list);
+    return list;
+}
 
-list_type *initialization_list(int *array, int size) {
+list_type *initialization_ready_list(int *array, int size) {
     //Проверка корректности вводимых данных
     if (!array){
         printf("Передан пустой массив\n");
@@ -16,40 +33,44 @@ list_type *initialization_list(int *array, int size) {
     
 
     //Выделяем память под массив указателей
-    Node **heads = (Node**) malloc(sizeof(Node*) * size);
-    if (!heads){
+    Node **node_array = (Node**) malloc(sizeof(Node*) * size);
+    if (!node_array){
         printf("Ошибка выделения памяти\n");
         return NULL;
     }
     
     //Создаём узлы, со значениями
     for (int i = 0; i < size; i++) { 
-        heads[i] = (Node*) malloc(sizeof(Node));
-        if (!heads[i]) {
+        node_array[i] = (Node*) malloc(sizeof(Node));
+        if (!node_array[i]) {
             printf("Ошибка выделения памяти для узла %d\n", i);
             return NULL;
         }
-        heads[i]->value = array[i];
-        heads[i]->prev = NULL;
-        heads[i]->next = NULL;
+        node_array[i]->value = array[i];
+        node_array[i]->prev = NULL;
+        node_array[i]->next = NULL;
     }
 
     //Определяем связи между узлами
     for (int i = 0; i < size; i++) {
         if (i > 0) {
-            heads[i]->prev = heads[i-1];
+            node_array[i]->prev = node_array[i-1];
         }
         if (i < size - 1) {
-            heads[i]->next = heads[i+1];
+            node_array[i]->next = node_array[i+1];
         }
     }
     
     //Инициализируем список и заполняем его
     list_type *list = (list_type *) malloc(sizeof(list_type));
+    if (!list) {
+        printf("Ошибка выделения памяти\n");
+        return NULL;
+    }
     list->size = size;
-    list->head = heads[0];
-    list->tail = heads[size-1];
-    free(heads);
+    list->head = node_array[0];
+    list->tail = node_array[size-1];
+    free(node_array);
     return list;
 }
 
@@ -68,7 +89,6 @@ void append(list_type *list, int value){
     new_node->next = NULL;
     list->tail = new_node;
     list->size++;
-    
 }
 
 void del_last_el(list_type *list){

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "list.h"
 int main(){
-    int arr[3] = {1,2, 3};
-    list_type *list = initialization_list(arr,3);
-    del_last_el(list);
+    int arr[1] = {1};
+    // list_type *list = initialization_ready_list(arr,1);
+    list_type *list = initialization_void_list();
+    // del_last_el(list);
     append(list, 10);
     append(list, 30);
     append(list, 10);
