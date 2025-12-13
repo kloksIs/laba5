@@ -56,6 +56,7 @@ int get_str_and_len(char *str, int size_buffer){
         }
         len++;
     }
+    return ERROR_OVERFLOW;
 }
 
 short input_verification(short num_choice){

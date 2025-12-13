@@ -26,7 +26,7 @@ FILE *initialization_DB(char *name_file){
     return file_ptr;
 }
 
-static bool validation_DB(FILE * file_ptr){
+bool validation_DB(FILE * file_ptr){
     //Проверка корректного считывания главных данных из первой строки
     char first_str[BUFFER_SIZE] = {0};
     if (!fgets(first_str, BUFFER_SIZE, file_ptr)){

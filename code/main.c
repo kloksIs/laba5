@@ -58,7 +58,7 @@ int main(){
                 free_list(list);
                 list = list_edit;
                 list_edit = NULL;
-                if (work_push_DB(list, "t")){
+                if (work_push_DB(list, "database.txt")){
                     exit(EXIT_FAILURE);
                 }
                 printf("База Данных успешно обновлена.\n");
@@ -69,5 +69,7 @@ int main(){
             break;
         }
     }
+    printf("Спасибо за использование программы. Всего доброго!\n");
+    printf("(￣^￣)ゞ\n");
     return 0;
 }

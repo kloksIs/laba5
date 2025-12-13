@@ -5,7 +5,7 @@
 
 FILE *initialization_DB(char *name_file);
 
-static bool validation_DB(FILE * file_ptr);
+bool validation_DB(FILE * file_ptr);
 
 list_type *get_data_DB(FILE * file_ptr);
 
