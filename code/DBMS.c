@@ -128,7 +128,7 @@ int work_push_DB(list_type *list, char *name_file){
 
     Node *node = list->head;
     fprintf(file, "БД для городских самокатов. Характеристик: 6 Кол-во_самокатов: %d\n", list->size);
-    fprintf(file, "ID_Num;Серийный_номер;Статус;Локация;Заряд_батареи(%%);Состояние");
+    fprintf(file, "ID_Num;Серийный_номер;Статус;Локация;Заряд_батареи(%%);Состояние\n");
     while (node != NULL){
         fprintf(file, "%d;%s;%s;%s;%d;%s\n",
                         node->value.id, node->value.serial_number,

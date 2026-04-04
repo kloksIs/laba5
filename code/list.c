@@ -118,6 +118,7 @@ void append(list_type *list, data_type value){
 void del_last_el(list_type *list) {
     if (list->size < 2){
         printf("Нельзя удалить конец, т.к. это начало списка\n");
+        return; //Если не работает вот последние изменение
     }
     
     list->tail = list->tail->prev;

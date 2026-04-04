@@ -4,3 +4,9 @@ main
 DBMS
 text.txt
 city_electric_scooters
+bin
+database
+database.o
+list.o
+main.o
+menu.o
