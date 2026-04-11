@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <limits>
 #include <regex>
+#include <sstream>
 
 enum MainMenu { SHOW_DB = 1, SEARCH, EDIT, EXIT };
 enum EditMenu { PREVIEW = 1, ADD, UPDATE, REMOVE, SAVE, BACK };
@@ -13,6 +14,7 @@ void printTable(Node::Data* array, int size);
 bool run_EdinMenu(list& list);
 
 int main(int argc, char* argv[]) {
+    setlocale(LC_ALL, "Russian");
     try {
         if (argc != 2) {
             std::cerr << "Ошибка: Неверное количество аргументов.\n"
@@ -27,7 +29,7 @@ int main(int argc, char* argv[]) {
         int choice;
         bool choice_flag = true; 
         std::string trash;
-
+        
         while (true) {
                 try {
                 if (choice_flag){
@@ -183,7 +185,7 @@ bool run_EdinMenu(list& list){
                     }
                     case ADD: {
                         bool isAdded = false;
-                        std::regex pattern(R"(\d+;[A-Z0-9]+;[А-Яа-я\s]+;\[[^\]]+\];\d+;[А-Яа-я\s]+;)");
+                        std::regex pattern(R"(\d+;[^;]+;[^;]+;\[[^\]]+\];\d+;[^;]+;)");
 
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         do {
@@ -258,7 +260,7 @@ bool run_EdinMenu(list& list){
                         printTable(list.get_data(targetNode), 1);
 
                         bool isUpdated = false;
-                        std::regex pattern(R"(\d+;[A-Z0-9]+;[А-Яа-я\s]+;\[[^\]]+\];\d+;[А-Яа-я\s]+;)");
+                        std::regex pattern(R"(\d+;[^;]+;[^;]+;\[[^\]]+\];\d+;[^;]+;)");
 
                         do {
                             std::cout << "\nВведите НОВЫЕ данные (Serial;Status;Location;Battery;Condition):" << std::endl;
